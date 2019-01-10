@@ -210,6 +210,21 @@ const SauceBrowsers = {
             result.desiredCapabilities.platform = "Linux";
           }
         }
+      } else {
+        if (result.appiumVersion) {
+          // if using appium, use safari as browser for iOS
+          if (result.platformName === "iOS") {
+            result.browserName = "Safari";
+          }
+        } else {
+          if (result.platform === "iOS") {
+            // iOS is not platform name, use OS X 10.10 instead
+            result.platform = "OS X 10.10";
+          } else if (result.platform === "Android") {
+            // Android is not platform name, use linux instead
+            result.platform = "Linux";
+          }
+        }
       }
 
       return result;
